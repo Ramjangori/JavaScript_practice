@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date object</title>
+    <style>
+        h1{
+            background-color:black;
+            color:red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1></h1>
+    
+</body>
+<script>
+   
+    
+
+     setInterval(()=>{
+ const dateTime = document.querySelector("H1")
+      let now = new Date();
+    let y = now.getFullYear();
+    let m = now.getMonth()+1;
+    let d = now.getDate();
+    let h = now.getHours();
+    let min = now.getMinutes();
+    let sec = now.getSeconds();
+
+      dateTime.innerHTML= `Time : ${h}/${min}/${sec} || Date :${d}/${m}/${y} `
+     },1000)
+    
+
+</script>
+</html>

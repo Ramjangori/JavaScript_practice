@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-DO-List</title>
+    <Style>
+        body{
+    background-color:#f4f6f8;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+    text-align: center;
+    color: #1e40af;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+/* Input + Button section */
+main{
+    width:60%;
+    margin:auto;
+    display: flex;
+    gap:10px;
+    margin-top: 20px;
+}
+
+#taskInput{
+    flex: 1;
+    height: 45px;
+    font-size: 18px;
+    padding: 0 12px;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    outline: none;
+}
+
+#taskInput:focus{
+    border-color: #2563eb;
+}
+
+button{
+    width: 120px;
+    height: 45px;
+    font-size: 16px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+button:hover{
+    background-color: #1d4ed8;
+}
+
+/* Task container */
+.task-container{
+    width: 60%;
+    margin: auto;
+    margin-top: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Task list */
+.task-list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.task-list li{
+    padding: 12px 40px 12px 12px;
+    font-size: 18px;
+    border-bottom: 1px solid #e5e7eb;
+    position: relative;
+    cursor:pointer;
+}
+
+/* delete button */
+.task-list li span{
+    color: #dc2626;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+}
+
+.task-list li span:hover{
+    color: #b91c1c;
+}
+.done{
+    text-decoration: line-through;
+    color: gray;
+}
+
+
+    </Style>
+</head>
+
+<body>
+    <h1>To-Do-List</h1>
+<main>
+    <input type="" id="taskInput" placeholder="Enter a new task">
+    <button>Add Task</button>
+
+</main>
+<div class="task-container">
+<ul class="task-list">
+    <li>HEllo<span>&times</span></li>
+    
+</ul></div>
+</body>
+<script>
+
+   let allList = document.querySelector(".task-list")
+   let todoBtn = document.querySelector("BUTTON");
+   let todoInput = document.querySelector("INPUT")
+   let toDoList = JSON.parse(localStorage.getItem("TODO")) || [];
+   
+    allList.addEventListener("click",(e)=>{
+       if (e.target.tagName === "LI") {
+        e.target.classList.toggle("done");
+    }
+    })
+  todoBtn.addEventListener("click", () => {
+
+    if (todoInput.value.trim() === "") {
+        alert("Please enter a task");
+        return;
+    }
+
+    let obj = {
+        title: todoInput.value,
+        status: true
+    };
+
+    toDoList.push(obj);
+    localStorage.setItem("TODO", JSON.stringify(toDoList));
+    showData();
+
+    todoInput.value = "";
+});
+
+
+let showData=()=>{
+    let toDoList = JSON.parse(localStorage.getItem("TODO")) || [];
+    let list= "";
+    let Data = document.querySelector(".task-list");
+    toDoList.forEach((item,index)=>{
+        list += ` <li> ${index+1} .${item.title}<span onclick="delet(${index})">&times</span></li>`
+    })
+
+      Data.innerHTML = list;
+}
+
+let delet=(id)=>{
+       let toDoList = JSON.parse(localStorage.getItem("TODO")) || [];
+
+    toDoList.splice(id, 1);
+
+    localStorage.setItem("TODO", JSON.stringify(toDoList));
+
+    showData(); // UI refresh
+ 
+
+
+}
+
+showData();
+
+</script>
+</html>

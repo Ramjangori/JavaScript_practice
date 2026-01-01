@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+ <script>
+   let vowel ="aeiouAEIOU";
+   let CheckVowels = (str)=>{
+      let count=0;
+     for(v of str){
+        if(vowel.includes(v)){
+            count++;
+        }
+     }
+      return count;
+    }
+   
+  console.log( "Vowels are " + CheckVowels("IdrishGori"));
+
+ </script>
+</html>

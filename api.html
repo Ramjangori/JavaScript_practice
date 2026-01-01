@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f6f8;
+        }
+        .Products{
+            display: flex;
+            gap:20px;
+            width: 90%;
+            margin: auto;
+            margin-top: 30px;
+        }
+        aside{
+            flex: 1;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 10px;
+            height: fit-content;
+            background-color: white;
+            position: sticky;
+            top: 25px;
+        }
+          aside a{
+            text-decoration:none;
+          }
+        .product-container{
+            flex: 3;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 10px;
+            background-color: white;
+        }
+        h1{
+            text-align: center;
+            color: #1e40af;
+            margin-bottom: 20px;
+        }
+        .product-list{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 20px;
+        }
+        .p1{
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+        }
+        .p1 img{
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+        }
+          .p1 h3{
+            color: #334155;
+            margin: 10px 0;
+            font-size:18px;
+        }
+        .p1 p{
+            color: #475569;
+            margin: 10px 0;
+        }
+        .p1 button{
+            width: 100%;
+            padding: 10px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.3s;
+            position: relative;
+            bottom:2px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="text-align: center; color: #1e40af; margin-top:20px;">Product Store</h1>
+       
+    </header>
+    <div class="Products">
+        <aside>
+         <ul class="category-list">
+           <h2>Catogries</h2>
+            
+
+         </ul>
+        </aside>
+        <main class="product-container">
+            <h1>Our Products</h1>
+            <div class="product-list">
+                <div class="p1">
+                  
+                    
+                </div>
+            </div>
+        </main>
+
+    </div>
+    
+</body>
+<script>
+    let getData= async(catSlug='')=>{
+        let apiUrl;
+        if(catSlug==''){
+             apiUrl = `https://dummyjson.com/products`
+        }
+        else{
+             apiUrl = `https://dummyjson.com/products/category/${catSlug}`
+        }
+       let apiResponce =await  fetch(apiUrl);
+       let data = await apiResponce.json()
+       let {products} = data;
+       let productsContainer = document.querySelector(".product-list")
+       let productList = "";
+       products.forEach((item,index)=>{
+         productList += `<div class="p1">
+                  
+                    <img src="${item.thumbnail}" alt="img">
+                     <div><h3>${item.title}</h3><b>$${item.price}</b><button>add</button></div>
+                </div>`
+       })
+      productsContainer.innerHTML = productList;
+
+    }
+    let getCategoties= async()=>{
+       let apiResponce =await  fetch('https://dummyjson.com/products/categories');
+       let category = await apiResponce.json()
+       let categoryList = document.querySelector('.category-list');
+       let list ='';
+       category.forEach((el)=>{
+       list += `
+        <li>
+            <a href="#" onclick="getData('${el.slug}')">${el.name}</a>
+        </li>`
+       });
+       categoryList.innerHTML += list;
+    }
+
+    getData('beauty');
+    getCategoties();
+</script>
+</html>

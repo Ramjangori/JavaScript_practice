@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    localStorage.setItem("UserName","Ramjan gori");
+    console.log(localStorage.getItem("UserName"));
+let user = {
+    userName : "Ramjan gori",
+    age : 22,
+    address : "Jaipur",
+    Phone : "8107741678"
+};
+localStorage.setItem("user",JSON.stringify(user));
+let userData = JSON.parse(localStorage.getItem("user"));
+alert(userData.userName);
+alert(userData.age)
+</script>
+</html>

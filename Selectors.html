@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom </title>
+</head>
+ 
+<body>
+    <h1>Log in form</h1>
+ <input type="text" placeholder="Enter name :">
+ <input type="text" placeholder="Enter age">
+ <button onclick="showData()">Submit</button>
+ <div class="data">
+    
+ </div>
+</body>
+<script>
+    let heading = document.getElementsByTagName('h1')[0];
+    let inputs = document.querySelectorAll('input');
+    heading.style.color = "blue";
+     heading.innerText = "Registration-form";
+      inputs.forEach(function(input){
+        input.style.border = "2px solid blue";
+        input.style.padding = "8px";
+        input.style.margin = "5px";
+        input.style.borderRadius = "5px";
+        });
+
+        function showData(){
+            let heading = document.querySelector('h1');
+            let inputs = document.querySelectorAll('input');
+            let Data = document.querySelector('.data');
+             inputs.forEach(input=>{
+                Data.innerHtml = Data.innerHTML+= `<p> ${input.value}</p>`
+             })
+        }
+    
+     
+
+</script>
+</html>
